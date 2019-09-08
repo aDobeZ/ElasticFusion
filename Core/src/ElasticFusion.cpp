@@ -717,7 +717,8 @@ void ElasticFusion::normaliseDepth(const float & minVal, const float & maxVal)
 
 void ElasticFusion::savePly()
 {
-    std::string filename = saveFilename;
+    //std::string filename = saveFilename;
+    std::string filename = "result";
     filename.append(".ply");
 
     // Open file

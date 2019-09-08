@@ -160,7 +160,7 @@ bool Deformation::constrain(std::vector<Ferns::Frame*> & ferns,
 
         bool poseUpdated = false;
 
-        if(!fernMatch || (fernMatch && optimised && meanConsError < 0.0003 && error < 0.12))
+        if(!fernMatch || (fernMatch && optimised && meanConsError < 0.03 && error < 2.0))
         {
             def.applyGraphToPoses(rawPoses);
 

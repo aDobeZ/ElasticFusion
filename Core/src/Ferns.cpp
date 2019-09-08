@@ -272,11 +272,11 @@ Eigen::Matrix4f Ferns::findFrame(std::vector<SurfaceConstraint> & constraints,
 
         float photoError = photometricCheck(vertSmall, imgSmall, estPose, fernPose, frames.at(minId)->initRgb);
 
-        int icpCountThresh = lost ? 1400 : 2400;
+        int icpCountThresh = lost ? 1800 : 2400;
 
 //        std::cout << rgbd.lastICPError << ", " << rgbd.lastICPCount << ", " << photoError << std::endl;
 
-        if(rgbd.lastICPError < 0.0003 && rgbd.lastICPCount > icpCountThresh && photoError < photoThresh)
+        if(rgbd.lastICPError < 0.003 && rgbd.lastICPCount > icpCountThresh && photoError < photoThresh)
         {
             lastClosest = minId;
 

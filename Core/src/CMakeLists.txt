@@ -5,8 +5,21 @@ project(libefusion)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}")
 
 find_package(Pangolin 0.1 REQUIRED)
+find_package(PCL 1.7 REQUIRED)
 find_package(CUDA REQUIRED)
 find_package(SuiteSparse REQUIRED)
+
+get_directory_property(dir_defs DIRECTORY ${CMAKE_SOURCE_DIR} COMPILE_DEFINITIONS)
+set(vtk_flags)
+foreach(it ${dir_defs})
+    if(it MATCHES "vtk*")
+    list(APPEND vtk_flags ${it})
+    endif()
+endforeach()
+ 
+foreach(d ${vtk_flags})
+    remove_definitions(-D${d})
+endforeach()
 
 set(efusion_SHADER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Shaders" CACHE PATH "Where the shaders live")
 
@@ -14,6 +27,10 @@ include_directories(${Pangolin_INCLUDE_DIRS})
 include_directories(${CUDA_INCLUDE_DIRS})
 include_directories(${EIGEN_INCLUDE_DIRS})
 include_directories(${SUITESPARSE_INCLUDE_DIRS})
+include_directories(${PCL_INCLUDE_DORS})
+
+link_directories(${PCL_LIBRARY_DIRS})
+
 
 file(GLOB srcs *.cpp)
 file(GLOB utils_srcs Utils/*.cpp)
@@ -47,7 +64,8 @@ endif()
 
 set(CMAKE_CXX_FLAGS ${ADDITIONAL_CMAKE_CXX_FLAGS} "-O3 -msse2 -msse3 -Wall -std=c++11 -DSHADER_DIR=${efusion_SHADER_DIR}")
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -std=c++11 -DSHADER_DIR=${efusion_SHADER_DIR}")
-  
+
+add_definitions(${PCL_DEFINITIONS})
 if(WIN32)
   add_definitions(-DWIN32_LEAN_AND_MEAN)
   add_definitions(-DNOMINMAX)
@@ -74,6 +92,7 @@ target_link_libraries(efusion
                       ${CUDA_LIBRARIES}
                       ${SUITESPARSE_LIBRARIES}
 					  ${EXTRA_WINDOWS_LIBS}
+		      ${PCL_LIBRARIES}
 )
 
 INSTALL(TARGETS efusion
