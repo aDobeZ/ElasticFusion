@@ -1,3 +1,39 @@
+# Pipeline
+
+The 3D reconstruction use the core algorithm of ElasticFusion, and the surface reconstruction use open source toolbox [CloudCompare](https://github.com/cloudcompare/cloudcompare). In this repo, I only upload a slightly modified version of ElasticFusion that I used. For the core part of ElasticFusion, only some parameters are modified. The modification in GUI part is for usage of different kind of cameras.
+
+All cameras are recommended to re-calibration before using for better result!
+
+Recommend to use under Ubuntu 16.04 without ROS!
+
+## Directories
+
+- Core：The core of ElasticFusion
+- GUI: Basic pipeline for Kinect v2
+- GUI-Realsense: Basic pipeline for Realsense series(test on D435)
+  - Recommand to use Realsense: Hand hold & relatively better result. 
+- GUI-Xtion: Basic pipeline for Asus Xtion2
+
+## Installation
+
+First install the driver for each camera in advance. Then follow the installation instructions of ElasticFusion.  For each GUI* like directories, run the following commands:
+
+```shell
+cd GUI
+mkdir build && cd build
+cmake ../src
+make
+```
+
+## Usage
+
+```shell
+cd GUI/build
+./ElasticFusion
+```
+
+Once finish the scanning, press **Save** button of the GUI, and the point cloud result will be saved in **result.ply**
+
 # ElasticFusion #
 
 Real-time dense visual SLAM system capable of capturing comprehensive dense globally consistent surfel-based maps of room scale environments explored using an RGB-D camera.
@@ -119,7 +155,7 @@ An example of this can be seen in the GUI code. Essentially all you need to do i
     find_package(efusion REQUIRED)
     include_directories(${EFUSION_INCLUDE_DIR})
     target_link_libraries(MyProject ${EFUSION_LIBRARY})
-    
+
 To then use the Core API, make sure to include the header file in your source file:
 ```cpp
     #include <ElasticFusion.h>
