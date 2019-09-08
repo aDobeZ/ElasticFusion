@@ -34,6 +34,10 @@ cd GUI/build
 
 Once finish the scanning, press **Save** button of the GUI, and the point cloud result will be saved in **result.ply**
 
+## To Do
+* Replace the global loop closure with [DLoopDetector](https://github.com/dorian3d/DLoopDetector) which is recommended by the author of ElasticFusion.
+* Use more sensory information to improve the result of reconstruction.
+
 # ElasticFusion #
 
 Real-time dense visual SLAM system capable of capturing comprehensive dense globally consistent surfel-based maps of room scale environments explored using an RGB-D camera.
