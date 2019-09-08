@@ -29,7 +29,7 @@ LiveLogReader::LiveLogReader(std::string file, bool flipColors, CameraType type)
     std::cout << "Creating live capture... "; std::cout.flush();
 
     if(type == CameraType::OpenNI2)
-      cam = new OpenNI2Interface(Resolution::getInstance().width(),Resolution::getInstance().height());
+      cam = new OpenNI2Interface(Resolution::getInstance().width(),Resolution::getInstance().height(), 30);
     else if(type == CameraType::RealSense)
       cam = new RealSenseInterface(Resolution::getInstance().width(), Resolution::getInstance().height());
     else

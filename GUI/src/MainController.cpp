@@ -34,7 +34,8 @@ MainController::MainController(int argc, char * argv[])
     std::string calibrationFile;
     Parse::get().arg(argc, argv, "-cal", calibrationFile);
 
-    Resolution::getInstance(640, 480);
+    Resolution::getInstance(512, 424);
+    //Resolution::getInstance(640, 480);
 
     if(calibrationFile.length())
     {
@@ -42,7 +43,8 @@ MainController::MainController(int argc, char * argv[])
     }
     else
     {
-        Intrinsics::getInstance(528, 528, 320, 240);
+        Intrinsics::getInstance(364.531494, 364.531494, 256, 212);
+        //Intrinsics::getInstance(528, 528, 320, 240);
     }
 
     Parse::get().arg(argc, argv, "-l", logFile);
